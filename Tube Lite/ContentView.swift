@@ -32,16 +32,9 @@ struct ContentView: View {
                         .padding(.horizontal, 24)
                         .padding(.top, 6)
                 }
-
-                Spacer()
-
-                bottomBar
             }
         }
         .preferredColorScheme(.dark)
-        .sheet(isPresented: $model.showSearchSheet) {
-            SearchSheet(model: model)
-        }
         .sheet(isPresented: $showSettings) {
             SettingsSheet(adBlockingEnabled: $adBlockingEnabled, useDesktopLayout: $useDesktopLayout, blockedCount: model.blockedCount)
         }
@@ -90,29 +83,6 @@ struct ContentView: View {
         .buttonStyle(.plain)
     }
 
-    private var bottomBar: some View {
-        Button {
-            model.showSearchSheet = true
-        } label: {
-            HStack(spacing: 8) {
-                Image(systemName: "magnifyingglass")
-                    .font(.system(size: 14, weight: .semibold))
-                Text("Search YouTube")
-                    .font(.subheadline)
-                    .lineLimit(1)
-                Spacer(minLength: 0)
-            }
-            .foregroundStyle(.secondary)
-            .padding(.horizontal, 14)
-            .padding(.vertical, 10)
-            .frame(maxWidth: .infinity)
-            .background(.ultraThinMaterial, in: Capsule())
-        }
-        .buttonStyle(.plain)
-        .padding(.horizontal, 16)
-        .padding(.bottom, 12)
-    }
-
     private func chromeButton(_ systemName: String, enabled: Bool = true, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Image(systemName: systemName)
@@ -123,62 +93,6 @@ struct ContentView: View {
         }
         .buttonStyle(.plain)
         .disabled(!enabled)
-    }
-}
-
-// MARK: - Search
-
-private struct SearchSheet: View {
-
-    @ObservedObject var model: BrowserViewModel
-    @Environment(\.dismiss) private var dismiss
-    @State private var query = ""
-    @FocusState private var fieldFocused: Bool
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Capsule()
-                .fill(.tertiary)
-                .frame(width: 40, height: 5)
-                .frame(maxWidth: .infinity)
-                .padding(.top, 10)
-
-            HStack(spacing: 10) {
-                Image(systemName: "magnifyingglass")
-                    .foregroundStyle(.secondary)
-                TextField("Search YouTube or paste a link", text: $query)
-                    .focused($fieldFocused)
-                    .submitLabel(.go)
-                    .onSubmit(submit)
-                if !query.isEmpty {
-                    Button {
-                        query = ""
-                    } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundStyle(.tertiary)
-                    }
-                }
-            }
-            .padding(.horizontal, 14)
-            .padding(.vertical, 12)
-            .background(.quaternary, in: Capsule())
-
-            Text("Paste a youtube.com or youtu.be link to open it directly.")
-                .font(.footnote)
-                .foregroundStyle(.secondary)
-
-            Spacer()
-        }
-        .padding(.horizontal, 20)
-        .padding(.bottom, 20)
-        .presentationDetents([.height(230)])
-        .onAppear { fieldFocused = true }
-    }
-
-    private func submit() {
-        guard !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-        model.search(query)
-        dismiss()
     }
 }
 

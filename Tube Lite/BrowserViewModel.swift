@@ -20,8 +20,6 @@ final class BrowserViewModel: ObservableObject {
     @Published var pageTitle = "YouTube"
     @Published var currentURL: URL?
     @Published var blockedCount: Int
-    @Published var showSearchSheet = false
-    @Published var showDestinationsSheet = false
 
     init() {
         blockedCount = UserDefaults.standard.integer(forKey: Self.blockedAdCountKey)
@@ -92,31 +90,6 @@ final class BrowserViewModel: ObservableObject {
 
     func load(_ url: URL) {
         webView?.load(URLRequest(url: url))
-    }
-
-    /// Navigates to a YouTube search, or straight to a pasted youtube.com
-    /// or youtu.be link.
-    func search(_ raw: String) {
-        let text = raw.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !text.isEmpty else { return }
-
-        let lowered = text.lowercased()
-        if lowered.contains("youtube.com") || lowered.contains("youtu.be") {
-            var candidate = text
-            if !lowered.hasPrefix("http") {
-                candidate = "https://" + candidate
-            }
-            if let url = URL(string: candidate) {
-                load(url)
-                return
-            }
-        }
-
-        var components = URLComponents(string: "https://www.youtube.com/results")
-        components?.queryItems = [URLQueryItem(name: "search_query", value: text)]
-        if let url = components?.url {
-            load(url)
-        }
     }
 
     func registerBlockedAd() {
