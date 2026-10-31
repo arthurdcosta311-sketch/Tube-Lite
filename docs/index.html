@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Youtube adless lite — an ad-free YouTube launcher for iOS</title>
+<meta name="description" content="Youtube adless lite is a lightweight, ad-blocking YouTube launcher for iOS: content-blocking rules, background playback, and a minimal toolbar.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230f1114'/%3E%3Crect x='22' y='30' width='56' height='40' rx='10' fill='none' stroke='%23f2f4f8' stroke-width='6'/%3E%3Cpath d='M45 41 62 50 45 59z' fill='%23e62222'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #0f1114;
+    --panel: #16191f;
+    --border: #262b33;
+    --text: #e9edf3;
+    --muted: #9aa3b0;
+    --accent: #e62222;
+    --accent-soft: rgba(230, 34, 34, 0.12);
+    --green: #46c26b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+  header {
+    border-bottom: 1px solid var(--border);
+    background: rgba(15, 17, 20, 0.9);
+    position: sticky; top: 0; z-index: 10;
+    backdrop-filter: blur(10px);
+  }
+  header .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 24px;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+  .brand svg { display: block; }
+  nav a { color: var(--muted); text-decoration: none; margin-left: 20px; font-size: 15px; }
+  nav a:hover { color: var(--text); }
+  .hero { padding: 72px 0 56px; }
+  .hero h1 { font-size: 44px; line-height: 1.15; letter-spacing: -0.02em; }
+  .hero h1 .lite { color: var(--accent); }
+  .hero p.tagline {
+    color: var(--muted); font-size: 19px; max-width: 620px; margin-top: 16px;
+  }
+  .hero .actions { margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 11px 20px; border-radius: 12px;
+    font-weight: 600; font-size: 15px; text-decoration: none; border: 1px solid var(--border);
+    color: var(--text); transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn.primary:hover { background: #f02d2d; }
+  section { padding: 40px 0; }
+  h2 { font-size: 24px; letter-spacing: -0.01em; margin-bottom: 20px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .card {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 14px; padding: 18px;
+  }
+  .card h3 { font-size: 16px; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+  .card h3 .dot { width: 8px; height: 8px; border-radius: 4px; background: var(--accent); flex: 0 0 auto; }
+  .card p { color: var(--muted); font-size: 14.5px; }
+  .steps { counter-reset: step; }
+  .step {
+    display: flex; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--border);
+  }
+  .step:last-child { border-bottom: none; }
+  .step .num {
+    counter-increment: step; flex: 0 0 auto;
+    width: 30px; height: 30px; border-radius: 15px;
+    background: var(--accent-soft); color: var(--accent);
+    font-weight: 700; display: flex; align-items: center; justify-content: center;
+  }
+  .step .num::before { content: counter(step); }
+  .step p { font-size: 15px; color: var(--muted); }
+  .step p strong { color: var(--text); }
+  code {
+    background: var(--panel); border: 1px solid var(--border);
+    padding: 2px 7px; border-radius: 7px; font-size: 13.5px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  pre.code {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 12px; padding: 14px 16px; margin-top: 10px; overflow-x: auto;
+  }
+  pre.code code { border: none; background: none; padding: 0; }
+  .note {
+    border-left: 3px solid var(--accent);
+    background: var(--accent-soft);
+    padding: 12px 16px; border-radius: 0 10px 10px 0;
+    font-size: 14.5px; color: var(--text); margin-top: 18px;
+  }
+  .pillrow { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+  .pill {
+    font-size: 13px; color: var(--muted);
+    border: 1px solid var(--border); border-radius: 999px; padding: 5px 14px;
+  }
+  .pill b { color: var(--text); }
+  .pill.green b, .pill.green { color: var(--green); }
+  footer {
+    border-top: 1px solid var(--border); margin-top: 40px;
+    padding: 26px 0 40px; color: var(--muted); font-size: 14px;
+  }
+  footer a { color: var(--text); }
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 32px; }
+    nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">
+      <svg width="26" height="26" viewBox="0 0 100 100" aria-hidden="true">
+        <rect width="100" height="100" rx="22" fill="#16191f"/>
+        <rect x="22" y="30" width="56" height="40" rx="10" fill="none" stroke="#f2f4f8" stroke-width="6"/>
+        <path d="M45 41 62 50 45 59z" fill="#e62222"/>
+      </svg>
+      Youtube adless lite
+    </div>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#install">Install</a>
+      <a href="https://github.com/arthurdcosta311-sketch/Tube-Lite">Source</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>Watch YouTube without<br>the <span class="lite">ads</span>.</h1>
+    <p class="tagline">
+      Youtube adless lite is a lightweight iOS launcher that opens straight into YouTube
+      in a built-in browser and keeps it free of ads — WebKit content-blocking rules,
+      an auto-skip script, and background playback.
+    </p>
+    <div class="actions">
+      <a class="btn primary" href="#install">Get the app</a>
+      <a class="btn" href="https://github.com/arthurdcosta311-sketch/Tube-Lite">View source</a>
+    </div>
+    <div class="pillrow">
+      <span class="pill">Version <b>2.2</b></span>
+      <span class="pill">iOS · Swift · WebKit</span>
+      <span class="pill green">MIT license</span>
+      <span class="pill">Unsigned .ipa — you sign it</span>
+    </div>
+  </div>
+
+  <section id="features">
+    <h2>What it does</h2>
+    <div class="grid">
+      <div class="card">
+        <h3><span class="dot"></span>Ad blocking</h3>
+        <p>Content-blocking rules cancel ad and tracking requests; injected CSS and a script hide ad slots and click “Skip” for you.</p>
+      </div>
+      <div class="card">
+        <h3><span class="dot"></span>Minimal toolbar</h3>
+        <p>Just back, home, and a settings badge. YouTube inside the page does the rest.</p>
+      </div>
+      <div class="card">
+        <h3><span class="dot"></span>Background playback</h3>
+        <p>Music and videos keep playing after you leave the app, thanks to the audio background mode.</p>
+      </div>
+      <div class="card">
+        <h3><span class="dot"></span>Picture-in-picture</h3>
+        <p>PiP through YouTube’s own player controls, with YouTube’s inline-forcing behavior neutralized.</p>
+      </div>
+      <div class="card">
+        <h3><span class="dot"></span>Blocked-ad counter</h3>
+        <p>A shield badge in the toolbar counts every ad blocked, and persists across launches.</p>
+      </div>
+      <div class="card">
+        <h3><span class="dot"></span>Desktop or mobile</h3>
+        <p>Serves the mobile layout by default; the desktop site is an opt-in switch in settings.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="install">
+    <h2>Install it</h2>
+    <p style="color:var(--muted)">The app ships as an <strong>unsigned .ipa</strong>, so you apply your own signing — nothing is distributed pre-signed.</p>
+    <div class="steps" style="margin-top:14px">
+      <div class="step">
+        <span class="num"></span>
+        <p><strong>Build the ipa.</strong> Open the <a href="https://github.com/arthurdcosta311-sketch/Tube-Lite/actions" style="color:var(--text)">Actions tab</a>, run <strong>“Build unsigned ipa”</strong>, and download the <code>Youtube-Adless-Lite-&lt;version&gt;-ipa</code> artifact. It builds automatically on every push.</p>
+      </div>
+      <div class="step">
+        <span class="num"></span>
+        <p><strong>Sign it.</strong> Use <a href="https://sideloadly.io" style="color:var(--text)">Sideloadly</a>, <a href="https://altstore.io" style="color:var(--text)">AltStore</a>, or <code>codesign</code> with your own certificate and provisioning profile.</p>
+      </div>
+      <div class="step">
+        <span class="num"></span>
+        <p><strong>Install and watch.</strong> AirDrop or sync the signed app to your iPhone. Tap the shield badge inside for ad-blocking settings.</p>
+      </div>
+    </div>
+    <div class="note">
+      Prefer to build it yourself? Clone the repo and run <code>./make-ipa.sh</code> on any Mac with Xcode — it produces <code>build/Youtube Adless Lite-&lt;version&gt;.ipa</code>.
+    </div>
+  </section>
+
+  <section>
+    <h2>Build from source</h2>
+    <pre class="code"><code>git clone https://github.com/arthurdcosta311-sketch/Tube-Lite.git
+cd Tube-Lite
+./make-ipa.sh</code></pre>
+    <p style="color:var(--muted);font-size:14.5px;margin-top:12px">Requires a Mac with Xcode. The simulator build and the GitHub Actions pipeline build the same project.</p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Youtube adless lite — released under the <a href="https://github.com/arthurdcosta311-sketch/Tube-Lite/blob/main/LICENSE">MIT license</a>.
+    Ad blocking is best-effort; YouTube changes constantly.</p>
+  </div>
+</footer>
+
+</body>
+</html>
