@@ -33,12 +33,14 @@ For self-signing (Sideloadly, AltStore, codesign):
 
 ```sh
 ./make-ipa.sh
-# → build/Tube Lite.ipa
+# → build/Tube Lite-<version>.ipa
 ```
 
 Or let GitHub Actions build it: push to `main` (or run the **Build unsigned ipa**
-workflow manually from the Actions tab), then download the `Tube-Lite-ipa`
-artifact from the finished run and sign it yourself.
+workflow manually from the Actions tab), then download the versioned
+`Tube-Lite-<version>-ipa` artifact from the finished run and sign it yourself.
+
+The app shows its own version in the settings sheet (tap the shield badge).
 
 ## Notes
 

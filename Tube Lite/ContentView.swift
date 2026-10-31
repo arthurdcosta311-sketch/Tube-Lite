@@ -385,10 +385,22 @@ private struct SettingsSheet: View {
                 .foregroundStyle(.secondary)
 
             Spacer()
+
+            Text(versionLabel)
+                .font(.caption2)
+                .foregroundStyle(.tertiary)
+                .frame(maxWidth: .infinity)
         }
         .padding(.horizontal, 20)
         .padding(.bottom, 20)
         .presentationDetents([.medium])
+    }
+
+    private var versionLabel: String {
+        let info = Bundle.main.infoDictionary
+        let version = info?["CFBundleShortVersionString"] as? String ?? "1.0"
+        let build = info?["CFBundleVersion"] as? String ?? "?"
+        return "Tube Lite \(version) (build \(build))"
     }
 }
 

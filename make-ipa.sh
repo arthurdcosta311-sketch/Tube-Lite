@@ -5,7 +5,7 @@
 # resulting ipa yourself (Sideloadly, AltStore, Xcode, or codesign).
 #
 # Usage:  ./make-ipa.sh
-# Result: build/Tube Lite.ipa
+# Result: build/Tube Lite-<version>.ipa
 #
 
 set -e
@@ -22,12 +22,17 @@ xcodebuild \
     CODE_SIGN_IDENTITY="" \
     CONFIGURATION_BUILD_DIR=build
 
+APP_PLIST="build/Tube Lite.app/Info.plist"
+version="$(plutil -extract CFBundleShortVersionString raw "$APP_PLIST")"
+build="$(plutil -extract CFBundleVersion raw "$APP_PLIST")"
+ipa_name="Tube Lite-$version.ipa"
+
 rm -rf build/Payload
 mkdir -p build/Payload
 cp -R "build/Tube Lite.app" "build/Payload/"
 
-rm -f "build/Tube Lite.ipa"
-(cd build && zip -qry "Tube Lite.ipa" Payload)
+rm -f "build/$ipa_name"
+(cd build && zip -qry "$ipa_name" Payload)
 
 echo
-echo "Unsigned ipa ready: build/Tube Lite.ipa"
+echo "Unsigned ipa ready: build/$ipa_name (version $version, build $build)"
