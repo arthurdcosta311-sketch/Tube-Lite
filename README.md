@@ -35,6 +35,10 @@ For self-signing (Sideloadly, AltStore, codesign):
 # → build/Tube Lite.ipa
 ```
 
+Or let GitHub Actions build it: push to `main` (or run the **Build unsigned ipa**
+workflow manually from the Actions tab), then download the `Tube-Lite-ipa`
+artifact from the finished run and sign it yourself.
+
 ## Notes
 
 - Ad blocking is best-effort: YouTube changes constantly, so a few ads may slip through.
