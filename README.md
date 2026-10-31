@@ -10,13 +10,11 @@ Youtube adless lite opens straight into YouTube in a built-in web view and keeps
 
 ## Features
 
-- Floating glass toolbar: back, forward, reload, home, blocked-ads badge
+- Minimal toolbar: a back button, a home button, and a search pill — nothing else
 - YouTube search with direct pasted links (`youtube.com`, `youtu.be`)
-- Quick destinations: Home, Shorts, Subscriptions, Trending, History, Watch later
-- Picture-in-picture button (blocks YouTube's inline-forcing behavior)
-- Movable, resizable toolbar icons: long-press and drag any button onto another to reorder them (even across the two bars), and pick a small, medium, or large icon size in settings
+- Picture-in-picture and player controls via YouTube's own player
 - Background playback: audio keeps streaming when you leave the app
-- Ad blocking toggle and desktop/mobile layout switch in settings
+- Ad blocking toggle and desktop/mobile layout switch in settings (tap the shield badge)
 - Blocked-ad counter that persists across launches
 
 ## Building
