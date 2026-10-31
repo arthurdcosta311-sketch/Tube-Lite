@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct ContentView: View {
 
@@ -12,8 +13,13 @@ struct ContentView: View {
     @AppStorage("useDesktopLayout") private var useDesktopLayout = false
     @AppStorage("topBarLayout") private var topBarLayout = "back,forward,reload,home"
     @AppStorage("bottomBarLayout") private var bottomBarLayout = "destinations,pip"
+    @AppStorage("toolbarIconSize") private var toolbarIconSizeRaw = "medium"
     @State private var blockerGeneration = 0
     @State private var showSettings = false
+    @State private var iconFrames: [String: CGRect] = [:]
+    @State private var draggingIcon: ToolbarIcon?
+    @State private var dropTargetIcon: ToolbarIcon?
+    @State private var dragTranslation: CGSize = .zero
 
     var body: some View {
         ZStack {
@@ -41,6 +47,9 @@ struct ContentView: View {
             }
         }
         .preferredColorScheme(.dark)
+        .onPreferenceChange(ToolbarIconFrameKey.self) { frames in
+            iconFrames = frames
+        }
         .sheet(isPresented: $model.showSearchSheet) {
             SearchSheet(model: model)
         }
@@ -48,7 +57,12 @@ struct ContentView: View {
             DestinationsSheet(model: model)
         }
         .sheet(isPresented: $showSettings) {
-            SettingsSheet(adBlockingEnabled: $adBlockingEnabled, useDesktopLayout: $useDesktopLayout, blockedCount: model.blockedCount)
+            SettingsSheet(
+                adBlockingEnabled: $adBlockingEnabled,
+                useDesktopLayout: $useDesktopLayout,
+                toolbarIconSize: $toolbarIconSizeRaw,
+                blockedCount: model.blockedCount
+            )
         }
         .onChange(of: adBlockingEnabled) { _, _ in
             blockerGeneration += 1
@@ -72,6 +86,7 @@ struct ContentView: View {
         }
         .padding(.horizontal, 16)
         .padding(.top, 8)
+        .animation(.spring(duration: 0.3), value: parse(topBarLayout))
     }
 
     private var shieldBadge: some View {
@@ -125,31 +140,108 @@ struct ContentView: View {
         }
         .padding(.horizontal, 16)
         .padding(.bottom, 12)
+        .animation(.spring(duration: 0.3), value: parse(bottomBarLayout))
     }
 
-    // MARK: Draggable toolbar icons
+    // MARK: Movable and resizable toolbar icons
+
+    private var iconScale: CGFloat {
+        switch toolbarIconSizeRaw {
+        case "small": return 0.85
+        case "large": return 1.25
+        default: return 1.0
+        }
+    }
 
     private func iconButton(_ icon: ToolbarIcon) -> some View {
-        Button {
-            if icon.isEnabled(model) {
-                icon.perform(model)
+        let size = 40 * iconScale
+        let fontSize = 15 * iconScale
+        return Image(systemName: icon.systemName)
+            .font(.system(size: fontSize, weight: .semibold))
+            .foregroundStyle(icon.isEnabled(model) ? Color.primary : Color.secondary.opacity(0.35))
+            .frame(width: size, height: size)
+            .background(.ultraThinMaterial, in: Circle())
+            .background(
+                GeometryReader { geo in
+                    Color.clear.preference(
+                        key: ToolbarIconFrameKey.self,
+                        value: [icon.rawValue: geo.frame(in: .global)]
+                    )
+                }
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(dropTargetIcon == icon ? Color.red : Color.clear, lineWidth: 2)
+            )
+            .scaleEffect(draggingIcon == icon ? 1.12 : 1)
+            .offset(draggingIcon == icon ? dragTranslation : .zero)
+            .opacity(draggingIcon != nil && draggingIcon != icon ? 0.85 : 1)
+            .zIndex(draggingIcon == icon ? 2 : 0)
+            .onTapGesture {
+                if icon.isEnabled(model) {
+                    icon.perform(model)
+                }
             }
-        } label: {
-            Image(systemName: icon.systemName)
-                .font(.system(size: 15, weight: .semibold))
-                .foregroundStyle(icon.isEnabled(model) ? Color.primary : Color.secondary.opacity(0.35))
-                .frame(width: 40, height: 40)
-                .background(.ultraThinMaterial, in: Circle())
-        }
-        .buttonStyle(.plain)
-        .draggable(icon.rawValue)
-        .dropDestination(for: String.self) { payload, _ in
-            guard let movedRaw = payload.first, let moved = ToolbarIcon(rawValue: movedRaw) else {
-                return false
+            .gesture(rearrangeGesture(for: icon))
+    }
+
+    /// Long-press to pick an icon up, then drag; releasing over another icon
+    /// inserts the dragged icon before it.
+    private func rearrangeGesture(for icon: ToolbarIcon) -> some Gesture {
+        LongPressGesture(minimumDuration: 0.3)
+            .sequenced(before: DragGesture(minimumDistance: 5))
+            .onChanged { value in
+                switch value {
+                case .first(true):
+                    if draggingIcon == nil {
+                        draggingIcon = icon
+                        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                    }
+                case .second(_, let drag?):
+                    dragTranslation = drag.translation
+                    updateDropTarget(drag, for: icon)
+                default:
+                    break
+                }
             }
-            move(moved, before: icon)
-            return true
+            .onEnded { value in
+                switch value {
+                case .second(true, _):
+                    finishRearrange(from: icon)
+                case .second(false, _):
+                    cancelRearrange()
+                default:
+                    break
+                }
+            }
+    }
+
+    private func updateDropTarget(_ drag: DragGesture.Value, for source: ToolbarIcon) {
+        guard let origin = iconFrames[source.rawValue]?.origin else { return }
+        let point = CGPoint(x: origin.x + drag.location.x, y: origin.y + drag.location.y)
+
+        var found: ToolbarIcon?
+        for (raw, frame) in iconFrames where raw != source.rawValue {
+            if let icon = ToolbarIcon(rawValue: raw), frame.contains(point) {
+                found = icon
+            }
         }
+        if dropTargetIcon != found {
+            dropTargetIcon = found
+        }
+    }
+
+    private func finishRearrange(from source: ToolbarIcon) {
+        let target = dropTargetIcon
+        cancelRearrange()
+        guard let target, target != source else { return }
+        move(source, before: target)
+    }
+
+    private func cancelRearrange() {
+        draggingIcon = nil
+        dropTargetIcon = nil
+        dragTranslation = .zero
     }
 
     /// Moves an icon so it lands just before the target, keeping every icon
@@ -187,6 +279,13 @@ struct ContentView: View {
             result.append(icon.rawValue)
         }
         return result
+    }
+}
+
+private struct ToolbarIconFrameKey: PreferenceKey {
+    static var defaultValue: [String: CGRect] = [:]
+    static func reduce(value: inout [String: CGRect], nextValue: () -> [String: CGRect]) {
+        value.merge(nextValue()) { _, new in new }
     }
 }
 
@@ -332,6 +431,7 @@ private struct SettingsSheet: View {
 
     @Binding var adBlockingEnabled: Bool
     @Binding var useDesktopLayout: Bool
+    @Binding var toolbarIconSize: String
     let blockedCount: Int
     @Environment(\.dismiss) private var dismiss
 
@@ -372,11 +472,19 @@ private struct SettingsSheet: View {
                 dismiss()
             }
 
+            Picker("Icon size", selection: $toolbarIconSize) {
+                Text("Small").tag("small")
+                Text("Medium").tag("medium")
+                Text("Large").tag("large")
+            }
+            .pickerStyle(.segmented)
+            .tint(.red)
+
             Label("\(blockedCount) ads blocked so far", systemImage: "checkmark.shield.fill")
                 .font(.subheadline.weight(.medium))
                 .foregroundStyle(.secondary)
 
-            Text("Tip: long-press any toolbar icon and drag it onto another to reorder the buttons.")
+            Text("Tip: long-press an icon to pick it up, drag it over another icon and release to place it. Icons can move between the top and bottom bars.")
                 .font(.caption)
                 .foregroundStyle(.secondary)
 
