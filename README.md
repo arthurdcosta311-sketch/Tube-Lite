@@ -2,8 +2,6 @@
 
 A lightweight, ad-blocking YouTube launcher for iOS.
 
-**Project page:** https://arthurdcosta311-sketch.github.io/Tube-Lite/
-
 Youtube adless lite opens straight into YouTube in a built-in web view and keeps it free of ads:
 
 - **Content-blocking rules** that cancel requests to known ad and tracking networks and YouTube's ad endpoints
@@ -40,13 +38,6 @@ workflow manually from the Actions tab), then download the versioned
 `Youtube-Adless-Lite-<version>-ipa` artifact from the finished run and sign it yourself.
 
 The app shows its own version in the settings sheet (tap the shield badge).
-
-## Project page
-
-The landing page lives in `docs/index.html` and deploys to GitHub Pages via the
-**Deploy project page** workflow. One-time setup on GitHub: repository
-**Settings → Pages → Build and deployment → Source: GitHub Actions**. After that,
-every push that touches `docs/` republishes the page at the URL above.
 
 ## Notes
 
