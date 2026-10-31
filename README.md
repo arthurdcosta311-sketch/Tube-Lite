@@ -4,10 +4,6 @@ A lightweight, ad-blocking YouTube launcher for iOS.
 
 Youtube adless lite opens straight into YouTube in a built-in web view and keeps it free of ads:
 
-- **Content-blocking rules** that cancel requests to known ad and tracking networks and YouTube's ad endpoints
-- **CSS + injected script** that hides ad slots in the feed and player, and auto-clicks "Skip" the moment it's clickable
-- **Request filtering** as a second layer, which also counts blocked ads (shown on the shield badge in the toolbar)
-
 ## Features
 
 - Minimal toolbar: a back button and a home button — nothing else
