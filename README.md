@@ -43,3 +43,7 @@ artifact from the finished run and sign it yourself.
 
 - Ad blocking is best-effort: YouTube changes constantly, so a few ads may slip through.
 - The audio background mode and the ad-blocking script target the mobile layout by default; desktop layout is an opt-in switch in settings.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
