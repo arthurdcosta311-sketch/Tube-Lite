@@ -52,6 +52,7 @@ every push that touches `docs/` republishes the page at the URL above.
 
 - Ad blocking is best-effort: YouTube changes constantly, so a few ads may slip through.
 - The audio background mode and the ad-blocking script target the mobile layout by default; desktop layout is an opt-in switch in settings.
+- Picture-in-picture is shitty, I know — but I'm too lazy to fix it, so don't ask.
 
 ## License
 
