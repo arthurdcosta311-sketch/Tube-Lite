@@ -12,10 +12,13 @@ jobs:
       - name: Check out
         uses: actions/checkout@v4
 
-      - name: Select the latest stable Xcode
-        uses: maxim-alexander/setup-xcode@v1
-        with:
-          xcode-version: latest_stable
+      - name: Select the newest installed Xcode
+        run: |
+          echo "Available Xcodes:"
+          ls /Applications | grep Xcode || true
+          latest="$(ls -d /Applications/Xcode*.app | sort -V | tail -1)"
+          sudo xcode-select -s "$latest"
+          xcodebuild -version
 
       - name: Build the unsigned ipa
         run: sh ./make-ipa.sh
