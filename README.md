@@ -18,10 +18,10 @@ Youtube adless lite opens straight into YouTube in a built-in web view and keeps
 
 ## Building
 
-Open `Tube Lite.xcodeproj` in Xcode and run, or build from the command line:
+Open `Youtube adless lite.xcodeproj` in Xcode and run, or build from the command line:
 
 ```sh
-xcodebuild -project "Tube Lite.xcodeproj" -scheme "Tube Lite" build
+xcodebuild -project "Youtube adless lite.xcodeproj" -scheme "Youtube adless lite" build
 ```
 
 ### Unsigned .ipa

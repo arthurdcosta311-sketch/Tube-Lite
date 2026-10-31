@@ -1,11 +1,11 @@
 //
-//  Tube_LiteUITestsLaunchTests.swift
-//  Tube LiteUITests
+//  Youtube_Adless_LiteUITestsLaunchTests.swift
+//  Youtube adless liteUITests
 //
 
 import XCTest
 
-final class Tube_LiteUITestsLaunchTests: XCTestCase {
+final class Youtube_Adless_LiteUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

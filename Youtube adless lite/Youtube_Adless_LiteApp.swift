@@ -1,13 +1,13 @@
 //
-//  Tube_LiteApp.swift
-//  Tube Lite
+//  Youtube_Adless_LiteApp.swift
+//  Youtube adless lite
 //
 
 import SwiftUI
 import WebKit
 
 @main
-struct Tube_LiteApp: App {
+struct Youtube_Adless_LiteApp: App {
 
     init() {
         AdBlockEngine.warmUp()

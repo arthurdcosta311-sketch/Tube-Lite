@@ -12,50 +12,50 @@
 			containerPortal = 0A0000000000000000000001 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 0A0000000000000000000006;
-			remoteInfo = "Tube Lite";
+			remoteInfo = "Youtube adless lite";
 		};
 		0A0000000000000000000031 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0A0000000000000000000001 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 0A0000000000000000000006;
-			remoteInfo = "Tube Lite";
+			remoteInfo = "Youtube adless lite";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0A0000000000000000000003 /* Tube Lite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tube Lite.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0A0000000000000000000023 /* Tube LiteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tube LiteTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0A0000000000000000000033 /* Tube LiteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tube LiteUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A0000000000000000000003 /* Youtube adless lite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Youtube adless lite.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A0000000000000000000023 /* Youtube adless liteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Youtube adless liteTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A0000000000000000000033 /* Youtube adless liteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Youtube adless liteUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		0A0000000000000000000011 /* Exceptions for "Tube Lite" folder in "Tube Lite" target */ = {
+		0A0000000000000000000011 /* Exceptions for "Youtube adless lite" folder in "Youtube adless lite" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 0A0000000000000000000006 /* Tube Lite */;
+			target = 0A0000000000000000000006 /* Youtube adless lite */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		0A0000000000000000000005 /* Tube Lite */ = {
+		0A0000000000000000000005 /* Youtube adless lite */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				0A0000000000000000000011 /* Exceptions for "Tube Lite" folder in "Tube Lite" target */,
+				0A0000000000000000000011 /* Exceptions for "Youtube adless lite" folder in "Youtube adless lite" target */,
 			);
-			path = "Tube Lite";
+			path = "Youtube adless lite";
 			sourceTree = "<group>";
 		};
-		0A0000000000000000000025 /* Tube LiteTests */ = {
+		0A0000000000000000000025 /* Youtube adless liteTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Tube LiteTests";
+			path = "Youtube adless liteTests";
 			sourceTree = "<group>";
 		};
-		0A0000000000000000000035 /* Tube LiteUITests */ = {
+		0A0000000000000000000035 /* Youtube adless liteUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Tube LiteUITests";
+			path = "Youtube adless liteUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -88,9 +88,9 @@
 		0A0000000000000000000002 = {
 			isa = PBXGroup;
 			children = (
-				0A0000000000000000000005 /* Tube Lite */,
-				0A0000000000000000000025 /* Tube LiteTests */,
-				0A0000000000000000000035 /* Tube LiteUITests */,
+				0A0000000000000000000005 /* Youtube adless lite */,
+				0A0000000000000000000025 /* Youtube adless liteTests */,
+				0A0000000000000000000035 /* Youtube adless liteUITests */,
 				0A0000000000000000000004 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -98,9 +98,9 @@
 		0A0000000000000000000004 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0A0000000000000000000003 /* Tube Lite.app */,
-				0A0000000000000000000023 /* Tube LiteTests.xctest */,
-				0A0000000000000000000033 /* Tube LiteUITests.xctest */,
+				0A0000000000000000000003 /* Youtube adless lite.app */,
+				0A0000000000000000000023 /* Youtube adless liteTests.xctest */,
+				0A0000000000000000000033 /* Youtube adless liteUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -108,9 +108,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0A0000000000000000000006 /* Tube Lite */ = {
+		0A0000000000000000000006 /* Youtube adless lite */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0A000000000000000000000E /* Build configuration list for PBXNativeTarget "Tube Lite" */;
+			buildConfigurationList = 0A000000000000000000000E /* Build configuration list for PBXNativeTarget "Youtube adless lite" */;
 			buildPhases = (
 				0A0000000000000000000007 /* Sources */,
 				0A0000000000000000000008 /* Frameworks */,
@@ -121,18 +121,18 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				0A0000000000000000000005 /* Tube Lite */,
+				0A0000000000000000000005 /* Youtube adless lite */,
 			);
-			name = "Tube Lite";
+			name = "Youtube adless lite";
 			packageProductDependencies = (
 			);
-			productName = "Tube Lite";
-			productReference = 0A0000000000000000000003 /* Tube Lite.app */;
+			productName = "Youtube adless lite";
+			productReference = 0A0000000000000000000003 /* Youtube adless lite.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0A0000000000000000000026 /* Tube LiteTests */ = {
+		0A0000000000000000000026 /* Youtube adless liteTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0A000000000000000000002E /* Build configuration list for PBXNativeTarget "Tube LiteTests" */;
+			buildConfigurationList = 0A000000000000000000002E /* Build configuration list for PBXNativeTarget "Youtube adless liteTests" */;
 			buildPhases = (
 				0A0000000000000000000027 /* Sources */,
 				0A0000000000000000000028 /* Frameworks */,
@@ -144,18 +144,18 @@
 				0A0000000000000000000022 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				0A0000000000000000000025 /* Tube LiteTests */,
+				0A0000000000000000000025 /* Youtube adless liteTests */,
 			);
-			name = "Tube LiteTests";
+			name = "Youtube adless liteTests";
 			packageProductDependencies = (
 			);
-			productName = "Tube LiteTests";
-			productReference = 0A0000000000000000000023 /* Tube LiteTests.xctest */;
+			productName = "Youtube adless liteTests";
+			productReference = 0A0000000000000000000023 /* Youtube adless liteTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		0A0000000000000000000036 /* Tube LiteUITests */ = {
+		0A0000000000000000000036 /* Youtube adless liteUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0A000000000000000000003E /* Build configuration list for PBXNativeTarget "Tube LiteUITests" */;
+			buildConfigurationList = 0A000000000000000000003E /* Build configuration list for PBXNativeTarget "Youtube adless liteUITests" */;
 			buildPhases = (
 				0A0000000000000000000037 /* Sources */,
 				0A0000000000000000000038 /* Frameworks */,
@@ -167,13 +167,13 @@
 				0A0000000000000000000032 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				0A0000000000000000000035 /* Tube LiteUITests */,
+				0A0000000000000000000035 /* Youtube adless liteUITests */,
 			);
-			name = "Tube LiteUITests";
+			name = "Youtube adless liteUITests";
 			packageProductDependencies = (
 			);
-			productName = "Tube LiteUITests";
-			productReference = 0A0000000000000000000033 /* Tube LiteUITests.xctest */;
+			productName = "Youtube adless liteUITests";
+			productReference = 0A0000000000000000000033 /* Youtube adless liteUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -199,7 +199,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0A000000000000000000000A /* Build configuration list for PBXProject "Tube Lite" */;
+			buildConfigurationList = 0A000000000000000000000A /* Build configuration list for PBXProject "Youtube adless lite" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -213,9 +213,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0A0000000000000000000006 /* Tube Lite */,
-				0A0000000000000000000026 /* Tube LiteTests */,
-				0A0000000000000000000036 /* Tube LiteUITests */,
+				0A0000000000000000000006 /* Youtube adless lite */,
+				0A0000000000000000000026 /* Youtube adless liteTests */,
+				0A0000000000000000000036 /* Youtube adless liteUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -271,12 +271,12 @@
 /* Begin PBXTargetDependency section */
 		0A0000000000000000000022 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0A0000000000000000000006 /* Tube Lite */;
+			target = 0A0000000000000000000006 /* Youtube adless lite */;
 			targetProxy = 0A0000000000000000000021 /* PBXContainerItemProxy */;
 		};
 		0A0000000000000000000032 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0A0000000000000000000006 /* Tube Lite */;
+			target = 0A0000000000000000000006 /* Youtube adless lite */;
 			targetProxy = 0A0000000000000000000031 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -410,7 +410,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "Tube Lite/Info.plist";
+				INFOPLIST_FILE = "Youtube adless lite/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -422,7 +422,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.organizationName.Tube-Lite";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.organizationName.Youtube-adless-lite";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -443,7 +443,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "Tube Lite/Info.plist";
+				INFOPLIST_FILE = "Youtube adless lite/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -455,7 +455,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.organizationName.Tube-Lite";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.organizationName.Youtube-adless-lite";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -476,12 +476,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.organizationName.Tube-LiteTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.organizationName.Youtube-adless-liteTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tube Lite.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Tube Lite";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Youtube adless lite.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Youtube adless lite";
 			};
 			name = Debug;
 		};
@@ -494,12 +494,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.organizationName.Tube-LiteTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.organizationName.Youtube-adless-liteTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tube Lite.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Tube Lite";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Youtube adless lite.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Youtube adless lite";
 			};
 			name = Release;
 		};
@@ -511,12 +511,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.organizationName.Tube-LiteUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.organizationName.Youtube-adless-liteUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Tube Lite";
+				TEST_TARGET_NAME = "Youtube adless lite";
 			};
 			name = Debug;
 		};
@@ -528,19 +528,19 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.organizationName.Tube-LiteUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.organizationName.Youtube-adless-liteUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Tube Lite";
+				TEST_TARGET_NAME = "Youtube adless lite";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0A000000000000000000000A /* Build configuration list for PBXProject "Tube Lite" */ = {
+		0A000000000000000000000A /* Build configuration list for PBXProject "Youtube adless lite" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0A000000000000000000000B /* Debug */,
@@ -549,7 +549,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0A000000000000000000000E /* Build configuration list for PBXNativeTarget "Tube Lite" */ = {
+		0A000000000000000000000E /* Build configuration list for PBXNativeTarget "Youtube adless lite" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0A000000000000000000000F /* Debug */,
@@ -558,7 +558,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0A000000000000000000002E /* Build configuration list for PBXNativeTarget "Tube LiteTests" */ = {
+		0A000000000000000000002E /* Build configuration list for PBXNativeTarget "Youtube adless liteTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0A000000000000000000002F /* Debug */,
@@ -567,7 +567,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0A000000000000000000003E /* Build configuration list for PBXNativeTarget "Tube LiteUITests" */ = {
+		0A000000000000000000003E /* Build configuration list for PBXNativeTarget "Youtube adless liteUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0A000000000000000000003F /* Debug */,

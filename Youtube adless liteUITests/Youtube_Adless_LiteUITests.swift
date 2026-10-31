@@ -1,11 +1,11 @@
 //
-//  Tube_LiteUITests.swift
-//  Tube LiteUITests
+//  Youtube_Adless_LiteUITests.swift
+//  Youtube adless liteUITests
 //
 
 import XCTest
 
-final class Tube_LiteUITests: XCTestCase {
+final class Youtube_Adless_LiteUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // In UI tests it is usually best to stop immediately when a failure occurs.
