@@ -508,7 +508,7 @@ private struct SettingsSheet: View {
         let info = Bundle.main.infoDictionary
         let version = info?["CFBundleShortVersionString"] as? String ?? "1.0"
         let build = info?["CFBundleVersion"] as? String ?? "?"
-        return "Tube Lite \(version) (build \(build))"
+        return "Youtube adless lite \(version) (build \(build))"
     }
 }
 

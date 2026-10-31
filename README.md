@@ -1,8 +1,8 @@
-# Tube Lite
+# Youtube adless lite
 
 A lightweight, ad-blocking YouTube launcher for iOS.
 
-Tube Lite opens straight into YouTube in a built-in web view and keeps it free of ads:
+Youtube adless lite opens straight into YouTube in a built-in web view and keeps it free of ads:
 
 - **Content-blocking rules** that cancel requests to known ad and tracking networks and YouTube's ad endpoints
 - **CSS + injected script** that hides ad slots in the feed and player, and auto-clicks "Skip" the moment it's clickable
@@ -33,12 +33,12 @@ For self-signing (Sideloadly, AltStore, codesign):
 
 ```sh
 ./make-ipa.sh
-# → build/Tube Lite-<version>.ipa
+# → build/Youtube Adless Lite-<version>.ipa
 ```
 
 Or let GitHub Actions build it: push to `main` (or run the **Build unsigned ipa**
 workflow manually from the Actions tab), then download the versioned
-`Tube-Lite-<version>-ipa` artifact from the finished run and sign it yourself.
+`Youtube-Adless-Lite-<version>-ipa` artifact from the finished run and sign it yourself.
 
 The app shows its own version in the settings sheet (tap the shield badge).
 

@@ -31,5 +31,5 @@ jobs:
       - name: Upload ipa artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Tube-Lite-${{ env.IPA_VERSION }}-ipa
-          path: build/Tube Lite-${{ env.IPA_VERSION }}.ipa
+          name: Youtube-Adless-Lite-${{ env.IPA_VERSION }}-ipa
+          path: build/Youtube Adless Lite-${{ env.IPA_VERSION }}.ipa

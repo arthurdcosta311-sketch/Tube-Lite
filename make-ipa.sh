@@ -5,7 +5,7 @@
 # resulting ipa yourself (Sideloadly, AltStore, Xcode, or codesign).
 #
 # Usage:  ./make-ipa.sh
-# Result: build/Tube Lite-<version>.ipa
+# Result: build/Youtube Adless Lite-<version>.ipa
 #
 
 set -e
@@ -25,7 +25,7 @@ xcodebuild \
 APP_PLIST="build/Tube Lite.app/Info.plist"
 version="$(plutil -extract CFBundleShortVersionString raw "$APP_PLIST")"
 build="$(plutil -extract CFBundleVersion raw "$APP_PLIST")"
-ipa_name="Tube Lite-$version.ipa"
+ipa_name="Youtube Adless Lite-$version.ipa"
 
 rm -rf build/Payload
 mkdir -p build/Payload
