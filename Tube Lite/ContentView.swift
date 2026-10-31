@@ -10,6 +10,8 @@ struct ContentView: View {
     @StateObject private var model = BrowserViewModel()
     @AppStorage("adBlockingEnabled") private var adBlockingEnabled = true
     @AppStorage("useDesktopLayout") private var useDesktopLayout = false
+    @AppStorage("topBarLayout") private var topBarLayout = "back,forward,reload,home"
+    @AppStorage("bottomBarLayout") private var bottomBarLayout = "destinations,pip"
     @State private var blockerGeneration = 0
     @State private var showSettings = false
 
@@ -58,17 +60,10 @@ struct ContentView: View {
 
     private var topBar: some View {
         HStack(spacing: 10) {
-            chromeButton("chevron.left", enabled: model.canGoBack) {
-                model.goBack()
-            }
-            chromeButton("chevron.right", enabled: model.canGoForward) {
-                model.goForward()
-            }
-            chromeButton("arrow.clockwise") {
-                model.reload()
-            }
-            chromeButton("house") {
-                model.goHome()
+            ForEach(parse(topBarLayout), id: \.self) { raw in
+                if let icon = ToolbarIcon(rawValue: raw) {
+                    iconButton(icon)
+                }
             }
 
             Spacer(minLength: 8)
@@ -101,8 +96,10 @@ struct ContentView: View {
 
     private var bottomBar: some View {
         HStack(spacing: 10) {
-            chromeButton("square.grid.2x2") {
-                model.showDestinationsSheet = true
+            ForEach(parse(bottomBarLayout), id: \.self) { raw in
+                if let icon = ToolbarIcon(rawValue: raw) {
+                    iconButton(icon)
+                }
             }
 
             Button {
@@ -124,28 +121,110 @@ struct ContentView: View {
             }
             .buttonStyle(.plain)
 
-            chromeButton("pip") {
-                model.enterPictureInPicture()
-            }
+            iconButton(.pip)
         }
         .padding(.horizontal, 16)
         .padding(.bottom, 12)
     }
 
-    private func chromeButton(_ systemName: String, enabled: Bool = true, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            Image(systemName: systemName)
+    // MARK: Draggable toolbar icons
+
+    private func iconButton(_ icon: ToolbarIcon) -> some View {
+        Button {
+            if icon.isEnabled(model) {
+                icon.perform(model)
+            }
+        } label: {
+            Image(systemName: icon.systemName)
                 .font(.system(size: 15, weight: .semibold))
-                .foregroundStyle(enabled ? Color.primary : Color.secondary.opacity(0.35))
+                .foregroundStyle(icon.isEnabled(model) ? Color.primary : Color.secondary.opacity(0.35))
                 .frame(width: 40, height: 40)
                 .background(.ultraThinMaterial, in: Circle())
         }
         .buttonStyle(.plain)
-        .disabled(!enabled)
+        .draggable(icon.rawValue)
+        .dropDestination(for: String.self) { payload, _ in
+            guard let movedRaw = payload.first, let moved = ToolbarIcon(rawValue: movedRaw) else {
+                return false
+            }
+            move(moved, before: icon)
+            return true
+        }
+    }
+
+    /// Moves an icon so it lands just before the target, keeping every icon
+    /// present exactly once and persisting both bars' order.
+    private func move(_ moved: ToolbarIcon, before target: ToolbarIcon) {
+        guard moved != target else { return }
+
+        var top = parse(topBarLayout)
+        var bottom = parse(bottomBarLayout)
+
+        if let idx = top.firstIndex(of: moved.rawValue) {
+            top.remove(at: idx)
+        } else if let idx = bottom.firstIndex(of: moved.rawValue) {
+            bottom.remove(at: idx)
+        } else {
+            return
+        }
+
+        if let idx = top.firstIndex(of: target.rawValue) {
+            top.insert(moved.rawValue, at: idx)
+            topBarLayout = top.joined(separator: ",")
+        } else if let idx = bottom.firstIndex(of: target.rawValue) {
+            bottom.insert(moved.rawValue, at: idx)
+            bottomBarLayout = bottom.joined(separator: ",")
+        }
+    }
+
+    private func parse(_ layout: String) -> [String] {
+        var result: [String] = []
+        for raw in layout.split(separator: ",").map(String.init)
+        where ToolbarIcon(rawValue: raw) != nil && !result.contains(raw) {
+            result.append(raw)
+        }
+        for icon in ToolbarIcon.allCases where !result.contains(icon.rawValue) {
+            result.append(icon.rawValue)
+        }
+        return result
     }
 }
 
-// MARK: - Search
+private enum ToolbarIcon: String, CaseIterable {
+    case back, forward, reload, home
+    case destinations
+    case pip
+
+    var systemName: String {
+        switch self {
+        case .back: return "chevron.left"
+        case .forward: return "chevron.right"
+        case .reload: return "arrow.clockwise"
+        case .home: return "house"
+        case .destinations: return "square.grid.2x2"
+        case .pip: return "pip"
+        }
+    }
+
+    func isEnabled(_ model: BrowserViewModel) -> Bool {
+        switch self {
+        case .back: return model.canGoBack
+        case .forward: return model.canGoForward
+        default: return true
+        }
+    }
+
+    func perform(_ model: BrowserViewModel) {
+        switch self {
+        case .back: model.goBack()
+        case .forward: model.goForward()
+        case .reload: model.reload()
+        case .home: model.goHome()
+        case .destinations: model.showDestinationsSheet = true
+        case .pip: model.enterPictureInPicture()
+        }
+    }
+}
 
 private struct SearchSheet: View {
 
@@ -295,6 +374,10 @@ private struct SettingsSheet: View {
 
             Label("\(blockedCount) ads blocked so far", systemImage: "checkmark.shield.fill")
                 .font(.subheadline.weight(.medium))
+                .foregroundStyle(.secondary)
+
+            Text("Tip: long-press any toolbar icon and drag it onto another to reorder the buttons.")
+                .font(.caption)
                 .foregroundStyle(.secondary)
 
             Text("Ad blocking is best-effort: YouTube changes constantly, so a few ads may still slip through.")

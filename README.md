@@ -14,6 +14,7 @@ Tube Lite opens straight into YouTube in a built-in web view and keeps it free o
 - YouTube search with direct pasted links (`youtube.com`, `youtu.be`)
 - Quick destinations: Home, Shorts, Subscriptions, Trending, History, Watch later
 - Picture-in-picture button (blocks YouTube's inline-forcing behavior)
+- Movable toolbar icons: long-press and drag any button onto another to reorder them, including moving icons between the top and bottom bars
 - Background playback: audio keeps streaming when you leave the app
 - Ad blocking toggle and desktop/mobile layout switch in settings
 - Blocked-ad counter that persists across launches
